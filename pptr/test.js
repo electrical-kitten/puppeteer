@@ -24,5 +24,3 @@ const searchTermENV = process.env.SEARCHTXT ?? 'defaultValue';
 
   await browser.close();
 })();
-
-// testing changes
