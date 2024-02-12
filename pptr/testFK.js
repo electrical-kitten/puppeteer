@@ -11,6 +11,12 @@ const inventoryName = 'testPuppy';
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
+  await page.setViewport({
+    width: 1400,
+    height: 1000,
+    deviceScaleFactor: 1,
+  });
+
   await page.goto('https://multishik.cynteka.ru/#/goods/registry/all');
   // await page.waitForSelector('.login-wrapper #login #password');
   await page.waitForSelector('.login-wrapper');
@@ -32,11 +38,11 @@ const inventoryName = 'testPuppy';
 
   await Promise.all([
     page.waitForNetworkIdle(),
-    await page.click('.sm-white'), // сохранить
-    await page.waitForNetworkIdle(),
+    page.click('.sm-white'), // сохранить
   ]);
   // await page.click('.gray-sm-white'); // назад
 
+  await page.waitForNetworkIdle();
   await page.screenshot({ path: './screens/facekitTest.jpg' });
 
   await browser.close();
