@@ -16,7 +16,11 @@ const password = '12345';
   await page.waitForSelector('#password');
   await page.type('#login', login, { delay: 100 });
   await page.type('#password', password, { delay: 100 });
-  await Promise.all([page.waitForNavigation(), page.click('.btn-login')]);
+  await Promise.all([
+    // page.wvigataitForNaion(),
+    page.waitForNetworkIdle(),
+    page.click('.btn-login'),
+  ]);
   await page.waitForSelector('.registry-tile');
   await page.screenshot({ path: './screens/facekitTest.jpg' });
 
