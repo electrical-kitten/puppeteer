@@ -67,4 +67,4 @@ const searchTermENV = process.env.SEARCHTXT ?? 'defaultValue';
   await browser.close();
 })();
 
-fjklsdfjlkf;
+// this is fetching test
