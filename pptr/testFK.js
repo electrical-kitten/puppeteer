@@ -7,7 +7,7 @@ const log = console.log;
 // await page.click('.gray-sm-white'); // назад
 const login = '(911) 117-8832';
 const password = '12345';
-const inventoryName = 'testPuppy';
+const destTransaction = 'Казакова';
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
@@ -44,10 +44,29 @@ const inventoryName = 'testPuppy';
     page.click('.sm-white'), // сохранить
   ]);
 
-  // await page.waitForNetworkIdle();
   await page.click('.check-text');
   await page.waitForNetworkIdle();
-  await page.screenshot({ path: './screens/facekitTest.jpg' });
+  await page.click('footer button');
+
+  await page.waitForNetworkIdle();
+  await page.click('.padding');
+  await page.waitForNetworkIdle();
+  await Promise.all([
+    page.click('.control-default'),
+    page.type('.control-default', destTransaction, { delay: 100 }),
+    new Promise(resolve => setTimeout(resolve, 6000)),
+  ]);
+  await page.click('.fck-scroll ul li button'); // попробовать на кнопке переместить из карточки
+
+  // const btnApply = await page.$eval('.between:nth-child(1)', elem => {
+  //   return elem;
+  // });
+  // await Promise.all([
+  //   await page.click('.between:nth-child(1)'),
+  // ]);
+
+  await page.waitForNetworkIdle(),
+    await page.screenshot({ path: './screens/facekitTest.jpg' });
 
   await browser.close();
 })();
