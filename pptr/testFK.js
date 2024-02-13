@@ -24,5 +24,14 @@ const password = '12345';
   await page.waitForSelector('.registry-tile');
   await page.screenshot({ path: './screens/facekitTest.jpg' });
 
+  await page.waitForSelector('ytd-comments-header-renderer');
+  const videoComments = await page.$eval(
+    'ytd-comments-header-renderer h2',
+    h2 => {
+      return h2.innerText;
+    }
+  );
+  console.log({ videoComments });
+
   await browser.close();
 })();
