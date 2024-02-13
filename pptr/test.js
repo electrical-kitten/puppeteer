@@ -41,7 +41,7 @@ const searchTermENV = process.env.SEARCHTXT ?? 'defaultValue';
     page.waitForNavigation(),
     // page.waitForNetworkIdle(),
     page.click('ytd-video-renderer h3 a#video-title'),
-    new Promise(resolve => setTimeout(resolve, 5000)),
+    new Promise(resolve => setTimeout(resolve, 6000)),
   ]);
   await page.screenshot({ path: './screens/searchResultClick.jpg' });
 
@@ -66,3 +66,5 @@ const searchTermENV = process.env.SEARCHTXT ?? 'defaultValue';
 
   await browser.close();
 })();
+
+// this is fetching test
