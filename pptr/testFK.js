@@ -4,6 +4,7 @@ const log = console.log;
 // const searchTermCLI =
 //   process.argv.length >= 3 ? process.argv[2] : 'defaultValue'; // =array
 // const searchTermENV = process.env.SEARCHTXT ?? 'defaultValue';
+// await page.click('.gray-sm-white'); // назад
 const login = '(911) 117-8832';
 const password = '12345';
 const inventoryName = 'testPuppy';
@@ -29,30 +30,24 @@ const inventoryName = 'testPuppy';
     page.click('.btn-login'),
   ]);
   await page.waitForSelector('.registry-tile');
+
+  ////создание ТМЦ////
   await page.click('.icon');
   await page.waitForNetworkIdle();
 
   await page.click('.mat-input-element');
   await page.waitForSelector('.mat-autocomplete-panel');
   await page.click('.mat-option');
-
+  await page.waitForNetworkIdle();
   await Promise.all([
     page.waitForNetworkIdle(),
     page.click('.sm-white'), // сохранить
   ]);
-  // await page.click('.gray-sm-white'); // назад
 
+  // await page.waitForNetworkIdle();
+  await page.click('.check-text');
   await page.waitForNetworkIdle();
   await page.screenshot({ path: './screens/facekitTest.jpg' });
-
-  await page.waitForSelector('ytd-comments-header-renderer');
-  const videoComments = await page.$eval(
-    'ytd-comments-header-renderer h2',
-    h2 => {
-      return h2.innerText;
-    }
-  );
-  console.log({ videoComments });
 
   await browser.close();
 })();
